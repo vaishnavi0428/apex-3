@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Web Development Task</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      text-align: center;
+    }
+
+    /* Responsive Styling */
+    @media (max-width: 600px) {
+      body {
+        background-color: #e0f7fa;
+        font-size: 14px;
+      }
+    }
+
+    @media (min-width: 601px) and (max-width: 1024px) {
+      body {
+        background-color: #f1f8e9;
+        font-size: 16px;
+      }
+    }
+
+    @media (min-width: 1025px) {
+      body {
+        background-color: #fff3e0;
+        font-size: 18px;
+      }
+    }
+
+    button {
+      margin: 10px;
+      padding: 10px 20px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+
+    #quiz, #joke {
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Welcome to Web Dev Task</h1>
+
+  <!-- Quiz Section -->
+  <div id="quiz">
+    <h2>Quiz: What is 5 + 3?</h2>
+    <button onclick="checkAnswer(8)">8</button>
+    <button onclick="checkAnswer(7)">7</button>
+    <p id="quizResult"></p>
+  </div>
+
+  <!-- API Fetch Section -->
+  <div id="joke">
+    <h2>Random Joke</h2>
+    <p id="jokeText">Loading...</p>
+  </div>
+
+  <script>
+    // Quiz Logic
+    function checkAnswer(ans) {
+      const result = document.getElementById('quizResult');
+      result.textContent = (ans === 8) ? "Correct!" : "Incorrect. Try again!";
+    }
+
+    // API Fetch Logic
+    fetch('https://official-joke-api.appspot.com/random_joke')
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('jokeText').textContent = `${data.setup} - ${data.punchline}`;
+      })
+      .catch(err => {
+        document.getElementById('jokeText').textContent = "Failed to load joke.";
+      });
+  </script>
+
+</body>
+</html>
